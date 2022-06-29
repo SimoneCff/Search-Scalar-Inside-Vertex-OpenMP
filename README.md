@@ -1,5 +1,5 @@
 # Ricerca Scalare all'interno di un Vettore
-Traccia:
+#Traccia:
 Implementare un programma parallelo per
 l’ambiente multicore con np unità processanti che
 impieghi la libreria OpenMP. Il programma deve essere
