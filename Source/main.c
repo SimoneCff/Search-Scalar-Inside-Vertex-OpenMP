@@ -6,6 +6,7 @@ int main(int argc, const char * argv[]) {
     int id_thread, N, beta, numT, *a,i,findIndex=0;
     double t0,t1,t;
     
+    printf("--------Progetto Calcolo Parallelo--------\n");
     //controllo N Threads dati in input
     if(argc >1 && atoi(argv[1])) {
         numT = atoi(argv[1]);
@@ -14,38 +15,46 @@ int main(int argc, const char * argv[]) {
         exit(EXIT_FAILURE);
     }
     
-    N=0;
     //Lettura dati input
-    do {
+    N=0;
+    while (N==0) {
     printf("\n Inserire il size dell vettore A \n :");
     scanf("%d",&N);
         if (N==0) {
             printf("\n Attenzione!, size del vettore A nullo, riprovare");
         }
-    } while (N==0);
+    };
     
-    a=(int*)calloc(N*sizeof(int));
+    a=(int*)malloc(N*sizeof(int));
     
     //Lettura vettore A
-    printf("\n Inserire i numeri all'interno del vettore A \n");
-    for(i=0; i < N; i++) {
-        scanf("%d",&a[i]);
+    printf("\n Inserire i numeri all'interno del vettore A \n\n");
+    
+   //lettura elementi in A
+    i=0;
+    while (i<N) {
+        if (scanf("%d",&a[i])){
+            i++;
+        } else {
+            printf("Attenzione! valore non valido riprovare \n");
+        }
+        fflush(stdin);
     }
     
      //Lettore scalare Beta
-    do {
+    while (beta<0) {
         printf("\n Inserire valore di Beta \n");
         scanf("%d",&beta);
         if(beta<0){
             printf("\n Attenzione!, valore di Beta minore di 0, riprovare");
         }
-    } while (beta<0);
+    }
 
      //prima che avviene la parallelizazione
     t0=omp_get_wtime();
-    printf("\n\n");
+    printf("\n");
 
-    printf("\n Inizio Paralellizazione su %d threads \n",numT);
+    printf("\n ---Inizio Paralellizazione su %d threads--- \n",numT);
     #pragma omp parallel for schedule(static) shared(N,a,beta,findIndex) private(i) num_threads(numT)
     for (i=0; i<N; i++) {
         if (a[i]==beta){
@@ -59,9 +68,9 @@ int main(int argc, const char * argv[]) {
     //Seconda chiamata
     t1=omp_get_wtime();
     t=t1-t0;
-    
+    printf("\n ---------------------------------------\n");
     //Stampa risultato
-    printf("\n Sono stati necessari %lf secondi per la ricerca \n",t);
+    printf("\n Sono stati necessari %lf secondi per la ricerca",t);
     printf("\n lo scalare beta: %d, é stato trovato %d volte nel vettore a \n",beta,findIndex);
     
     //Free
