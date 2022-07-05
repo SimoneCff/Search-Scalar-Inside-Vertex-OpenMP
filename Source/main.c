@@ -22,12 +22,9 @@ int main(int argc, const char * argv[]) {
         if (N==0) {
             printf("\n Attenzione!, size del vettore A nullo, riprovare");
         }
-        if (N<0) {
-            printf("\n Attenzione!, size del vettore A inferiore ad zero, riprovare");
-        }
-    } while (N<=0);
+    } while (N==0);
     
-    a=(int*)malloc(N*sizeof(int));
+    a=(int*)calloc(N*sizeof(int));
     
     //Lettura vettore A
     printf("\n Inserire i numeri all'interno del vettore A \n");
@@ -36,7 +33,6 @@ int main(int argc, const char * argv[]) {
     }
     
      //Lettore scalare Beta
-    beta = -1;
     do {
         printf("\n Inserire valore di Beta \n");
         scanf("%d",&beta);
