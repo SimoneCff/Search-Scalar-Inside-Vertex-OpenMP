@@ -15,6 +15,7 @@ int main(int argc, const char * argv[]) {
         exit(EXIT_FAILURE);
     }
     
+    
     //Lettura dati input
     N=0;
     while (N==0) {
@@ -42,6 +43,7 @@ int main(int argc, const char * argv[]) {
     }
     
      //Lettore scalare Beta
+    beta=-1;
     while (beta<0) {
         printf("\n Inserire valore di Beta \n");
         scanf("%d",&beta);
