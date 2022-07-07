@@ -1,0 +1,32 @@
+begin
+     if argc >1 and argv[1]
+         numt -> int(argv[1])
+     else
+         end
+       
+     "Leggi il size N del vettore a"
+    
+    "Allocazione Vettore a con malloc"
+
+    "lettura elementi vettore a"
+    while(i<N)
+       "Leggi l'elemento e inseriscilo in A"
+       i++
+
+    while(beta<0)
+       "Leggi lo scalare beta"
+
+    t0=omp_get_wtime();
+    #pragma omp parallel for schedule(static) shared(N,a,beta,findIndex) private(i) num_threads(numT)
+    for i=0 to N {
+        if a[i]==beta
+           #pragma omp atomic update
+                findIndex->findIndex+1;
+        
+    t1=omp_get_wtime();
+    t=t1-t0;
+    "Stampa di t"
+    "Stampa dello scalare beta ed findIndex"
+
+    "Deallocazione di a"
+end

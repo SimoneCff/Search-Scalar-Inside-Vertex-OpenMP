@@ -1,10 +1,13 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <omp.h>
 
 int main(int argc, const char * argv[]) {
-    int id_thread, N, beta, numT, *a,i,findIndex=0;
+    int id_thread, N,fsize, beta, numT, *a,i,findIndex=0;
     double t0,t1,t;
+    char c;
+    FILE *fv;
     
     printf("--------Progetto Calcolo Parallelo--------\n");
     //controllo N Threads dati in input
@@ -15,32 +18,37 @@ int main(int argc, const char * argv[]) {
         exit(EXIT_FAILURE);
     }
     
+    //controllo file input
+    if((fv=fopen("vector.txt","r"))==NULL){
+        printf("Errore apertura file \n");
+        exit(EXIT_FAILURE);
+    }
     
-    //Lettura dati input
-    N=0;
-    while (N==0) {
-    printf("\n Inserire il size dell vettore A \n :");
-    scanf("%d",&N);
-        if (N==0) {
-            printf("\n Attenzione!, size del vettore A nullo, riprovare");
-        }
-    };
+    //Controllo N elementi
+    N=1;
+    do {
+        c = fgetc(fv);
+        if (c == '\n') N++;
+    } while(c != EOF);
     
+    //reset pointer
+    rewind(fv);
+    printf("Vettore ha un Size Di N elementi: %d \n",N);
+    
+    //allocazione moemoria vettore a
     a=(int*)malloc(N*sizeof(int));
     
     //Lettura vettore A
-    printf("\n Inserire i numeri all'interno del vettore A \n\n");
+    printf("\n Inseriremto numeri all'interno del vettore A \n\n");
     
    //lettura elementi in A
     i=0;
     while (i<N) {
-        if (scanf("%d",&a[i])){
-            i++;
-        } else {
-            printf("Attenzione! valore non valido riprovare \n");
-        }
-        fflush(stdin);
+        fscanf(fv,"%d\n",&a[i]);
+        i++;
     }
+    //chiusura file dopo inserimento vettore
+    fclose(fv);
     
      //Lettore scalare Beta
     beta=-1;
