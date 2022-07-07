@@ -1,16 +1,23 @@
 begin
      if argc >1 and argv[1]
-         numt -> int(argv[1])
+         numt:= int(argv[1])
      else
          end
-       
-     "Leggi il size N del vettore a"
+    
+    if (fv is null)
+         end
+
+    "Leggi il size del vettore contanto gli elementi all'interno del file"
+    do
+      c:= fgetc(fv)
+      if (c:= '\n') N++
+    while (c != EOF)
     
     "Allocazione Vettore a con malloc"
 
     "lettura elementi vettore a"
     while(i<N)
-       "Leggi l'elemento e inseriscilo in A"
+       "Leggi l'elemento nel file e inseriscilo in A"
        i++
 
     while(beta<0)
@@ -24,7 +31,8 @@ begin
                 findIndex->findIndex+1;
         
     t1=omp_get_wtime();
-    t=t1-t0;
+    t:=t1-t0;
+    
     "Stampa di t"
     "Stampa dello scalare beta ed findIndex"
 
